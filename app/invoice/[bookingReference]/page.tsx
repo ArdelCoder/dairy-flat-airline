@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { connectToDatabase } from "../../../lib/mongodb";
 
 type InvoicePageProps = {
   params: Promise<{
@@ -6,24 +7,14 @@ type InvoicePageProps = {
   }>;
 };
 
-async function getBooking(bookingReference: string) {
-  const response = await fetch(
-    `http://localhost:3000/api/bookings/${bookingReference}`,
-    {
-      cache: "no-store",
-    }
-  );
-
-  if (!response.ok) {
-    return null;
-  }
-
-  return response.json();
-}
-
 export default async function InvoicePage({ params }: InvoicePageProps) {
   const { bookingReference } = await params;
-  const booking = await getBooking(bookingReference);
+
+  const db = await connectToDatabase();
+
+  const booking = await db.collection("bookings").findOne({
+    bookingReference,
+  });
 
   if (!booking) {
     return (
@@ -63,7 +54,7 @@ export default async function InvoicePage({ params }: InvoicePageProps) {
           <p><strong>Passengers:</strong> {booking.numberOfPassengers}</p>
           <p><strong>Price Per Passenger:</strong> ${booking.price}</p>
           <p><strong>Total Price:</strong> ${booking.totalPrice}</p>
-          <p><strong>Created At:</strong> {booking.createdAt}</p>
+          <p><strong>Created At:</strong> {String(booking.createdAt)}</p>
         </div>
 
         <Link
