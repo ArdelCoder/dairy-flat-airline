@@ -1,65 +1,128 @@
+import Link from "next/link";
 import Image from "next/image";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+
+const destinations = [
+    {
+        title: "Sydney",
+        image: "/images/sydney.jpg",
+        aircraft: "SyberJet SJ30i",
+        text: "Weekly prestige service using the SyberJet SJ30i.",
+    },
+    {
+        title: "Rotorua",
+        image: "/images/rotorua.jpg",
+        aircraft: "Cirrus SF50",
+        text: "Weekday shuttle services using the Cirrus SF50.",
+    },
+    {
+        title: "Great Barrier Island",
+        image: "/images/great-barrier.jpg",
+        aircraft: "Cirrus SF50",
+        text: "Scenic island services three times weekly.",
+    },
+    {
+        title: "Chatham Islands",
+        image: "/images/chatham.jpg",
+        aircraft: "HondaJet Elite",
+        text: "Specialist long-range regional service.",
+    },
+    {
+        title: "Lake Tekapo",
+        image: "/images/tekapo.jpg",
+        aircraft: "HondaJet Elite",
+        text: "Weekly South Island scenic service.",
+    },
+];
 
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+    return (
+        <>
+            <Navbar/>
+
+            <main className="min-h-screen bg-slate-100">
+                <section className="relative overflow-hidden px-8 py-28 text-white">
+                    <Image
+                        src="/images/banner.jpg"
+                        alt="Private aircraft banner"
+                        fill
+                        priority
+                        className="object-cover"
+                    />
+
+                    <div className="absolute inset-0 bg-slate-950/70"/>
+
+                    <div className="relative mx-auto max-w-7xl">
+                        <p className="text-sm uppercase tracking-widest text-blue-200">
+                            Private regional air travel from Dairy Flat
+                        </p>
+
+                        <h1 className="mt-4 max-w-3xl text-6xl font-bold">
+                            Dairy Flat Airline
+                        </h1>
+
+                        <p className="mt-6 max-w-2xl text-xl text-slate-200">
+                            Luxury point-to-point services to Sydney, Rotorua, Great Barrier
+                            Island, the Chatham Islands, and Lake Tekapo.
+                        </p>
+
+                        <div className="mt-10 flex gap-4">
+                            <Link
+                                href="/search"
+                                className="rounded-xl bg-white px-6 py-3 font-semibold text-slate-950 hover:bg-slate-200"
+                            >
+                                Search Flights
+                            </Link>
+
+                            <Link
+                                href="/manage"
+                                className="rounded-xl border border-white px-6 py-3 font-semibold text-white hover:bg-white hover:text-slate-950"
+                            >
+                                Manage Booking
+                            </Link>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="mx-auto max-w-7xl px-8 py-12">
+                    <h2 className="text-4xl font-bold text-slate-900">
+                        Destinations
+                    </h2>
+
+                    <div className="mt-8 grid gap-6 md:grid-cols-3">
+                        {destinations.map((destination) => (
+                            <div
+                                key={destination.title}
+                                className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow transition hover:-translate-y-1 hover:shadow-xl"
+                            >
+                                <div className="relative h-48">
+                                    <Image
+                                        src={destination.image}
+                                        alt={destination.title}
+                                        fill
+                                        className="object-cover"
+                                    />
+                                </div>
+
+                                <div className="flex flex-1 flex-col p-6">
+                                    <h3 className="text-2xl font-semibold text-slate-900">
+                                        {destination.title}
+                                    </h3>
+
+                                    <p className="mt-3 text-slate-600">
+                                        {destination.text}
+                                    </p>
+                                    <p className="mt-4 text-sm font-medium text-slate-500">
+                                        Aircraft: {destination.aircraft}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            </main>
+            <Footer/>
+        </>
+    );
 }
