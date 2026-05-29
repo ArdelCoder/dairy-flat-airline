@@ -1,17 +1,14 @@
-// Next.js Link component for internal navigation between pages.
-// Docs: https://nextjs.org/docs/app/api-reference/components/link
+
 import Link from "next/link";
 
-// Next.js Image component for optimized image loading.
-// Docs: https://nextjs.org/docs/app/api-reference/components/image
+
 import Image from "next/image";
 
 // Custom reusable components from your project.
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
-// Static data array used to generate the destination cards.
-// This avoids manually writing each card separately.
+
 const destinations = [
   {
     title: "Sydney",
@@ -45,24 +42,20 @@ const destinations = [
   },
 ];
 
-// Default exported React component.
-// In Next.js App Router, app/page.tsx becomes the homepage route "/".
+
 export default function Home() {
   return (
-    // React Fragment lets us return multiple top-level elements
-    // without adding an unnecessary wrapper div.
+
     <>
       <Navbar />
 
-      {/* Main page content. <main> is a semantic HTML element. */}
+
       <main className="min-h-screen bg-slate-100">
 
         {/* Hero/banner section */}
         <section className="relative overflow-hidden px-8 py-28 text-white">
 
-          {/* Background image for the hero area.
-              fill makes the image cover its parent container.
-              priority tells Next.js this image should load early. */}
+
           <Image
             src="/images/banner.jpg"
             alt="Private aircraft banner"
@@ -71,10 +64,10 @@ export default function Home() {
             className="object-cover"
           />
 
-          {/* Dark overlay placed over the image to improve text readability. */}
+
           <div className="absolute inset-0 bg-slate-950/70" />
 
-          {/* Hero content wrapper. relative keeps this content above the overlay. */}
+
           <div className="relative mx-auto max-w-7xl">
             <p className="text-sm uppercase tracking-widest text-blue-200">
               Private regional air travel from Dairy Flat
@@ -89,7 +82,7 @@ export default function Home() {
               Island, the Chatham Islands, and Lake Tekapo.
             </p>
 
-            {/* Navigation buttons using Next.js Link */}
+
             <div className="mt-10 flex gap-4">
               <Link
                 href="/search"
@@ -108,17 +101,16 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Destinations content section */}
+
         <section className="mx-auto max-w-7xl px-8 py-12">
           <h2 className="text-4xl font-bold text-slate-900">
             Destinations
           </h2>
 
-          {/* Responsive grid layout.
-              md:grid-cols-3 means three columns on medium screens and larger. */}
+
           <div className="mt-8 grid gap-6 md:grid-cols-3">
 
-            {/* map() loops through the destinations array and creates one card per item. */}
+
             {destinations.map((destination) => (
               <div
                 key={destination.title}
