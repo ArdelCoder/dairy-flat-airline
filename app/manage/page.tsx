@@ -26,19 +26,30 @@ export default function ManagePage() {
   const [message, setMessage] = useState("");
 
   async function findBooking() {
-    setMessage("");
-    setBooking(null);
+  setMessage("");
+  setBooking(null);
 
-    const response = await fetch(`/api/bookings/${bookingReference}`);
-
-    if (!response.ok) {
-      setMessage("Booking not found.");
-      return;
-    }
-
-    const data = await response.json();
-    setBooking(data);
+  if (!bookingReference.trim()) {
+    setMessage("Booking not found. Please enter a booking reference.");
+    return;
   }
+
+  const response = await fetch(`/api/bookings/${bookingReference.trim()}`);
+
+  if (!response.ok) {
+    setMessage("Booking not found.");
+    return;
+  }
+
+  const data = await response.json();
+
+  if (!data || !data.bookingReference) {
+    setMessage("Booking not found.");
+    return;
+  }
+
+  setBooking(data);
+}
 
   async function findPassengerBookings() {
     setMessage("");
